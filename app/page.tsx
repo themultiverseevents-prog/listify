@@ -113,18 +113,23 @@ export default function Home() {
           </div>
 
           {/* Pro CTA */}
-          <button className="inline-flex items-center gap-1.5 bg-[#1F1F1F] hover:bg-[#2A2A2A] text-white text-[13px] font-semibold px-4 py-2 rounded-lg transition-colors">
-            <svg
-              width="13"
-              height="13"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-            >
-              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-            </svg>
-            Upgrade to Pro — ₹99
+          <button className="group inline-flex flex-col items-center bg-[#1F1F1F] hover:bg-[#2A2A2A] text-white px-4 py-2 rounded-lg transition-colors">
+            <span className="flex items-center gap-1.5 text-[13px] font-bold leading-snug">
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+              >
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+              </svg>
+              Unlock Full Listing – ₹99
+            </span>
+            <span className="text-[10px] text-white/40 font-medium leading-none mt-0.5">
+              One-time · No subscription
+            </span>
           </button>
         </div>
       </nav>
@@ -149,15 +154,15 @@ export default function Home() {
 
           {/* Headline */}
           <h1 className="text-[52px] sm:text-[64px] font-extrabold text-[#1A1A1A] tracking-[-0.03em] leading-[1.06] max-w-3xl mx-auto">
-            Turn Your Product Into a{" "}
-            <span className="text-orange-500">High-Converting Listing</span>{" "}
+            Increase Your Product Sales with{" "}
+            <span className="text-orange-500">High-Converting Listings</span>{" "}
             in 60 Seconds
           </h1>
 
           {/* Subheadline */}
           <p className="mt-6 text-lg text-[#6B6560] max-w-xl mx-auto leading-relaxed">
-            Built for Amazon &amp; Flipkart sellers who want more sales without
-            wasting hours on copywriting.
+            Stop wasting hours writing listings that don&apos;t convert.
+            Generate optimized listings instantly.
           </p>
 
           {/* CTA */}
@@ -166,7 +171,7 @@ export default function Home() {
               href="#generator"
               className="btn-primary text-[15px] px-9 py-4 rounded-xl shadow-md hover:shadow-lg"
             >
-              Generate High-Converting Listing
+              Generate My Listing
               <svg
                 width="17"
                 height="17"
@@ -180,9 +185,21 @@ export default function Home() {
             </a>
           </div>
 
-          <p className="mt-4 text-sm text-[#A8A29E]">
-            Used by e-commerce sellers to create high-converting listings in seconds
+          {/* Below CTA micro copy */}
+          <p className="mt-3.5 text-[13px] text-[#A8A29E]">
+            No signup required &nbsp;·&nbsp; Takes 60 seconds
           </p>
+
+          {/* Trust line */}
+          <div className="mt-5 inline-flex items-center gap-2 text-[13px] text-[#6B6560]">
+            <span className="flex items-center gap-1 text-green-600 font-semibold">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Trusted by e-commerce sellers
+            </span>
+            to improve listing performance
+          </div>
 
           {/* Stats */}
           <div className="mt-14 inline-flex flex-wrap justify-center items-stretch divide-x divide-warm-200 bg-white border border-warm-200 rounded-2xl shadow-soft overflow-hidden">
@@ -223,12 +240,12 @@ export default function Home() {
           {/* Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
             {/* ── BEFORE ── */}
-            <div className="bg-warm-100 border border-warm-200 rounded-2xl p-7">
+            <div className="bg-warm-100 border border-warm-200 rounded-2xl p-7 opacity-90">
               {/* Badge */}
-              <div className="inline-flex items-center gap-1.5 bg-warm-200 text-[#7A7268] text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full mb-5">
+              <div className="inline-flex items-center gap-1.5 bg-red-50 border border-red-100 text-red-500 text-[11px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full mb-5">
                 <svg
-                  width="12"
-                  height="12"
+                  width="11"
+                  height="11"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -236,29 +253,29 @@ export default function Home() {
                 >
                   <path d="M18 6L6 18M6 6l12 12" />
                 </svg>
-                Without Listify
+                Typical Listing — Low Conversion
               </div>
 
               {/* Title */}
               <div className="mb-4">
-                <p className="text-[10px] font-bold uppercase tracking-widest text-[#B0A99F] mb-1">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-[#C8C1B4] mb-1">
                   Title
                 </p>
-                <p className="text-sm text-[#5A5550] italic">{BEFORE.title}</p>
+                <p className="text-sm text-[#9A938E] italic">{BEFORE.title}</p>
               </div>
 
               {/* Bullets */}
               <div className="mb-4">
-                <p className="text-[10px] font-bold uppercase tracking-widest text-[#B0A99F] mb-2">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-[#C8C1B4] mb-2">
                   Bullet Points
                 </p>
                 <ul className="space-y-1.5">
                   {BEFORE.bullets.map((b, i) => (
                     <li
                       key={i}
-                      className="flex items-start gap-2 text-sm text-[#5A5550] italic"
+                      className="flex items-start gap-2 text-sm text-[#9A938E] italic"
                     >
-                      <span className="mt-1.5 w-1 h-1 rounded-full bg-[#C8C1B4] shrink-0" />
+                      <span className="mt-1.5 w-1 h-1 rounded-full bg-[#DDD8CD] shrink-0" />
                       {b}
                     </li>
                   ))}
@@ -267,33 +284,42 @@ export default function Home() {
 
               {/* Description */}
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-[#B0A99F] mb-1">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-[#C8C1B4] mb-1">
                   Description
                 </p>
-                <p className="text-sm text-[#5A5550] italic leading-relaxed">
+                <p className="text-sm text-[#9A938E] italic leading-relaxed">
                   {BEFORE.description}
                 </p>
+              </div>
+
+              {/* Low conversion label */}
+              <div className="mt-5 pt-4 border-t border-warm-200 flex items-center gap-2">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#C8C1B4" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10" /><path d="M12 8v4M12 16h.01" />
+                </svg>
+                <span className="text-[11px] text-[#B0A99F] font-medium">Generic. No keywords. Low visibility.</span>
               </div>
             </div>
 
             {/* ── AFTER ── */}
             <div className="bg-white border-2 border-orange-200 rounded-2xl p-7 shadow-card relative">
-              {/* Subtle orange top accent bar */}
+              {/* Orange top accent bar */}
               <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-400 to-orange-500 rounded-t-2xl" />
 
-              {/* Badge */}
-              <div className="inline-flex items-center gap-1.5 bg-orange-50 text-orange-700 text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full mb-5">
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                >
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-                With Listify
+              {/* Badge row */}
+              <div className="flex items-center justify-between mb-5">
+                <div className="inline-flex items-center gap-1.5 bg-orange-50 text-orange-700 text-[11px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  Optimized Listing — High Conversion
+                </div>
+                <div className="inline-flex items-center gap-1 bg-green-50 text-green-700 text-[11px] font-bold px-2.5 py-1 rounded-full border border-green-100">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  Higher conversions
+                </div>
               </div>
 
               {/* Title */}
@@ -301,7 +327,7 @@ export default function Home() {
                 <p className="text-[10px] font-bold uppercase tracking-widest text-[#B0A99F] mb-1">
                   Title
                 </p>
-                <p className="text-sm font-semibold text-[#1A1A1A] leading-snug">
+                <p className="text-sm font-bold text-[#1A1A1A] leading-snug">
                   {AFTER.title}
                 </p>
               </div>
@@ -311,12 +337,12 @@ export default function Home() {
                 <p className="text-[10px] font-bold uppercase tracking-widest text-[#B0A99F] mb-2">
                   Bullet Points
                 </p>
-                <ul className="space-y-2">
+                <ul className="space-y-2.5">
                   {AFTER.bullets.map((b, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-[#2A2A2A]">
+                    <li key={i} className="flex items-start gap-2.5 text-sm text-[#1A1A1A]">
                       <span className="mt-1.5 w-2 h-2 rounded-full bg-orange-400 shrink-0" />
                       <span>
-                        <strong className="font-semibold">
+                        <strong className="font-bold">
                           {b.split("–")[0]}–
                         </strong>
                         {b.split("–").slice(1).join("–")}
@@ -324,8 +350,8 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <p className="mt-2 text-[11px] text-orange-600 font-semibold pl-4">
-                  + {AFTER.more} more bullet points…
+                <p className="mt-2.5 text-[11px] text-orange-600 font-semibold pl-5">
+                  + {AFTER.more} more optimized bullet points…
                 </p>
               </div>
 
@@ -334,9 +360,17 @@ export default function Home() {
                 <p className="text-[10px] font-bold uppercase tracking-widest text-[#B0A99F] mb-1">
                   Description
                 </p>
-                <p className="text-sm text-[#2A2A2A] leading-relaxed">
+                <p className="text-sm text-[#2A2A2A] leading-relaxed font-medium">
                   {AFTER.description}
                 </p>
+              </div>
+
+              {/* Result label */}
+              <div className="mt-5 pt-4 border-t border-orange-100 flex items-center gap-2">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#F97316" strokeWidth="2">
+                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" /><polyline points="17 6 23 6 23 12" />
+                </svg>
+                <span className="text-[11px] text-orange-700 font-semibold">Keyword-rich. Benefit-first. Built to convert.</span>
               </div>
             </div>
           </div>

@@ -192,48 +192,94 @@ function OutputSkeleton() {
   );
 }
 
-// ── Empty State ────────────────────────────────────────────────────────────
+// ── Empty State — faded skeleton preview of the output ────────────────────
 
 function EmptyState() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[440px] text-center px-6">
-      <div className="w-14 h-14 bg-orange-50 border border-orange-100 rounded-2xl flex items-center justify-center mb-5">
-        <svg
-          width="28"
-          height="28"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="#F97316"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-        </svg>
+    <div>
+      {/* Prompt header */}
+      <div className="px-6 pt-7 pb-5 text-center border-b border-warm-100">
+        <div className="w-10 h-10 bg-orange-50 border border-orange-100 rounded-xl mx-auto mb-3 flex items-center justify-center">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#F97316"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+          </svg>
+        </div>
+        <p className="text-[13px] font-bold text-[#1A1A1A]">
+          Your optimized listing will appear here
+        </p>
+        <p className="text-xs text-[#A8A29E] mt-1">
+          Fill the form on the left and hit &ldquo;Generate Listing&rdquo;
+        </p>
       </div>
-      <h3 className="text-[15px] font-bold text-[#1A1A1A] mb-2">
-        Your listing will appear here
-      </h3>
-      <p className="text-sm text-[#A8A29E] max-w-[240px] leading-relaxed">
-        Fill the form and click &ldquo;Generate Listing&rdquo; to get a
-        platform-ready listing.
-      </p>
 
-      {/* What you get */}
-      <div className="mt-8 w-full max-w-[260px] text-left space-y-2.5">
-        {[
-          { icon: "T", label: "SEO-optimised title" },
-          { icon: "≡", label: "5 benefit-first bullet points" },
-          { icon: "¶", label: "Persuasive description" },
-          { icon: "#", label: "10 backend search keywords" },
-        ].map((item) => (
-          <div key={item.label} className="flex items-center gap-3 text-sm text-[#6B6560]">
-            <span className="w-7 h-7 rounded-lg bg-warm-100 border border-warm-200 flex items-center justify-center text-xs font-bold text-[#B0A99F] shrink-0">
-              {item.icon}
-            </span>
-            {item.label}
+      {/* Skeleton preview — faded, communicates exactly what you get */}
+      <div className="p-5 space-y-3 opacity-40 pointer-events-none select-none">
+        {/* Title skeleton */}
+        <div className="border border-warm-200 rounded-xl overflow-hidden">
+          <div className="h-9 bg-warm-50 border-b border-warm-200 flex items-center justify-between px-4">
+            <div className="h-2 w-8 bg-warm-300 rounded-full" />
+            <div className="h-2 w-14 bg-warm-200 rounded-full" />
           </div>
-        ))}
+          <div className="p-4 space-y-2">
+            <div className="h-2 bg-warm-100 rounded-full w-full" />
+            <div className="h-2 bg-warm-100 rounded-full w-10/12" />
+          </div>
+        </div>
+
+        {/* Bullets skeleton */}
+        <div className="border border-warm-200 rounded-xl overflow-hidden">
+          <div className="h-9 bg-warm-50 border-b border-warm-200 flex items-center px-4">
+            <div className="h-2 w-20 bg-warm-300 rounded-full" />
+          </div>
+          <div className="p-4 space-y-2.5">
+            {[100, 88, 94, 82, 91].map((w, i) => (
+              <div key={i} className="flex items-center gap-2.5">
+                <div className="w-5 h-5 rounded-full bg-warm-200 shrink-0" />
+                <div
+                  className="h-2 bg-warm-100 rounded-full"
+                  style={{ width: `${w}%` }}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Description skeleton */}
+        <div className="border border-warm-200 rounded-xl overflow-hidden">
+          <div className="h-9 bg-warm-50 border-b border-warm-200 flex items-center px-4">
+            <div className="h-2 w-16 bg-warm-300 rounded-full" />
+          </div>
+          <div className="p-4 space-y-2">
+            {[100, 92, 96, 84, 78].map((w, i) => (
+              <div key={i} className="h-2 bg-warm-100 rounded-full" style={{ width: `${w}%` }} />
+            ))}
+          </div>
+        </div>
+
+        {/* Keywords skeleton */}
+        <div className="border border-warm-200 rounded-xl overflow-hidden">
+          <div className="h-9 bg-warm-50 border-b border-warm-200 flex items-center px-4">
+            <div className="h-2 w-24 bg-warm-300 rounded-full" />
+          </div>
+          <div className="p-4 flex flex-wrap gap-2">
+            {[52, 66, 44, 72, 58, 48, 62, 50, 42, 68].map((w, i) => (
+              <div
+                key={i}
+                className="h-6 bg-warm-100 rounded-full"
+                style={{ width: `${w}px` }}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -676,13 +722,22 @@ export default function ListingGenerator() {
         {loading ? (
           <OutputSkeleton />
         ) : output ? (
-          <OutputDisplay
-            output={output}
-            onRegenerate={generate}
-            isLoading={loading}
-          />
+          /* Subtle orange glow signals the content was just generated */
+          <div
+            className="rounded-2xl transition-all duration-500"
+            style={{
+              boxShadow:
+                "0 0 0 1px rgba(249,115,22,0.18), 0 8px 40px -8px rgba(249,115,22,0.10)",
+            }}
+          >
+            <OutputDisplay
+              output={output}
+              onRegenerate={generate}
+              isLoading={loading}
+            />
+          </div>
         ) : (
-          <div className="bg-white border border-warm-200 rounded-2xl shadow-soft">
+          <div className="bg-white border border-warm-200 rounded-2xl shadow-soft overflow-hidden">
             <EmptyState />
           </div>
         )}
