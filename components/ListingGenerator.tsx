@@ -53,43 +53,67 @@ const PLATFORMS = ["Amazon", "Flipkart", "Shopify", "Meesho", "Other"];
 
 // ── Icons ──────────────────────────────────────────────────────────────────
 
-function CopyIcon({ size = 16 }: { size?: number }) {
+function CopyIcon({ size = 15 }: { size?: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
       <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
     </svg>
   );
 }
 
-function CheckIcon({ size = 16 }: { size?: number }) {
+function CheckIcon({ size = 15 }: { size?: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <polyline points="20 6 9 17 4 12" />
+    </svg>
+  );
+}
+
+function ChevronDown() {
+  return (
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="#B0A99F"
+      strokeWidth="2"
+      strokeLinecap="round"
+    >
+      <path d="M6 9l6 6 6-6" />
     </svg>
   );
 }
 
 function SpinnerIcon() {
   return (
-    <svg
-      className="animate-spin"
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="none"
-    >
+    <svg className="animate-spin" width="17" height="17" viewBox="0 0 24 24" fill="none">
       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-      <path
-        className="opacity-75"
-        fill="currentColor"
-        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
-      />
+      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
     </svg>
   );
 }
 
-// ── Copy Button ───────────────────────────────────────────────────────────
+// ── Copy Button ────────────────────────────────────────────────────────────
 
 function CopyButton({ text, label }: { text: string; label: string }) {
   const [copied, setCopied] = useState(false);
@@ -97,27 +121,20 @@ function CopyButton({ text, label }: { text: string; label: string }) {
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(text);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
     } catch {
-      // Fallback for older browsers
       const el = document.createElement("textarea");
       el.value = text;
       document.body.appendChild(el);
       el.select();
       document.execCommand("copy");
       document.body.removeChild(el);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
     }
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
-    <button
-      onClick={handleCopy}
-      className="copy-btn"
-      title={`Copy ${label}`}
-    >
+    <button onClick={handleCopy} className="copy-btn" title={`Copy ${label}`}>
       {copied ? (
         <span className="text-green-500">
           <CheckIcon />
@@ -129,50 +146,48 @@ function CopyButton({ text, label }: { text: string; label: string }) {
   );
 }
 
+// ── Output Section Wrapper ─────────────────────────────────────────────────
+
+function OutputSection({
+  title,
+  action,
+  children,
+}: {
+  title: string;
+  action?: React.ReactNode;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="bg-white border border-warm-200 rounded-2xl overflow-hidden shadow-soft">
+      {/* Section header */}
+      <div className="flex items-center justify-between px-5 py-3.5 border-b border-warm-100 bg-warm-50">
+        <span className="text-[11px] font-bold uppercase tracking-[0.1em] text-[#A8A29E]">
+          {title}
+        </span>
+        {action}
+      </div>
+      {/* Content */}
+      <div className="px-5 py-4">{children}</div>
+    </div>
+  );
+}
+
 // ── Loading Skeleton ───────────────────────────────────────────────────────
 
 function OutputSkeleton() {
   return (
-    <div className="space-y-5 animate-pulse">
-      {/* Title skeleton */}
-      <div>
-        <div className="h-3 w-16 bg-gray-200 rounded mb-3" />
-        <div className="h-10 bg-gray-100 rounded-lg" />
-        <div className="h-4 w-24 bg-gray-100 rounded mt-2" />
-      </div>
-      {/* Bullets skeleton */}
-      <div>
-        <div className="h-3 w-24 bg-gray-200 rounded mb-3" />
-        <div className="space-y-2.5">
-          {[...Array(5)].map((_, i) => (
-            <div key={i} className="h-11 bg-gray-100 rounded-lg" />
-          ))}
-        </div>
-      </div>
-      {/* Description skeleton */}
-      <div>
-        <div className="h-3 w-24 bg-gray-200 rounded mb-3" />
-        <div className="space-y-2">
-          <div className="h-4 bg-gray-100 rounded w-full" />
-          <div className="h-4 bg-gray-100 rounded w-5/6" />
-          <div className="h-4 bg-gray-100 rounded w-4/5" />
-          <div className="h-4 bg-gray-100 rounded w-full" />
-          <div className="h-4 bg-gray-100 rounded w-3/4" />
-        </div>
-      </div>
-      {/* Keywords skeleton */}
-      <div>
-        <div className="h-3 w-20 bg-gray-200 rounded mb-3" />
-        <div className="flex flex-wrap gap-2">
-          {[...Array(10)].map((_, i) => (
-            <div
-              key={i}
-              className="h-6 bg-gray-100 rounded-full"
-              style={{ width: `${60 + Math.random() * 60}px` }}
-            />
-          ))}
-        </div>
-      </div>
+    <div className="space-y-4 animate-pulse">
+      {[{ h: "h-20" }, { h: "h-48" }, { h: "h-28" }, { h: "h-16" }].map(
+        (s, i) => (
+          <div
+            key={i}
+            className="bg-white border border-warm-200 rounded-2xl overflow-hidden shadow-soft"
+          >
+            <div className="h-10 bg-warm-100 border-b border-warm-100" />
+            <div className={`${s.h} bg-warm-50 m-4 rounded-xl`} />
+          </div>
+        )
+      )}
     </div>
   );
 }
@@ -181,14 +196,14 @@ function OutputSkeleton() {
 
 function EmptyState() {
   return (
-    <div className="flex flex-col items-center justify-center h-full min-h-[400px] text-center px-4">
-      <div className="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center mb-5">
+    <div className="flex flex-col items-center justify-center min-h-[440px] text-center px-6">
+      <div className="w-14 h-14 bg-orange-50 border border-orange-100 rounded-2xl flex items-center justify-center mb-5">
         <svg
-          width="32"
-          height="32"
+          width="28"
+          height="28"
           viewBox="0 0 24 24"
           fill="none"
-          stroke="#6366F1"
+          stroke="#F97316"
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -196,26 +211,24 @@ function EmptyState() {
           <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
         </svg>
       </div>
-      <h3 className="text-base font-semibold text-gray-800 mb-2">
+      <h3 className="text-[15px] font-bold text-[#1A1A1A] mb-2">
         Your listing will appear here
       </h3>
-      <p className="text-sm text-gray-400 max-w-xs">
-        Fill in the form and click &ldquo;Generate Listing&rdquo; to create a
-        high-converting product listing powered by AI.
+      <p className="text-sm text-[#A8A29E] max-w-[240px] leading-relaxed">
+        Fill the form and click &ldquo;Generate Listing&rdquo; to get a
+        platform-ready listing.
       </p>
 
-      <div className="mt-8 grid grid-cols-1 gap-3 w-full max-w-xs text-left">
+      {/* What you get */}
+      <div className="mt-8 w-full max-w-[260px] text-left space-y-2.5">
         {[
-          { icon: "T", label: "SEO-optimized title" },
-          { icon: "•", label: "5 benefit-first bullet points" },
+          { icon: "T", label: "SEO-optimised title" },
+          { icon: "≡", label: "5 benefit-first bullet points" },
           { icon: "¶", label: "Persuasive description" },
-          { icon: "#", label: "10 backend keywords" },
+          { icon: "#", label: "10 backend search keywords" },
         ].map((item) => (
-          <div
-            key={item.label}
-            className="flex items-center gap-3 text-sm text-gray-500"
-          >
-            <span className="w-7 h-7 rounded-lg bg-gray-100 flex items-center justify-center text-xs font-bold text-gray-400 shrink-0">
+          <div key={item.label} className="flex items-center gap-3 text-sm text-[#6B6560]">
+            <span className="w-7 h-7 rounded-lg bg-warm-100 border border-warm-200 flex items-center justify-center text-xs font-bold text-[#B0A99F] shrink-0">
               {item.icon}
             </span>
             {item.label}
@@ -237,99 +250,92 @@ function OutputDisplay({
   onRegenerate: () => void;
   isLoading: boolean;
 }) {
-  const titleCharCount = output.title.length;
-  const charCountColor =
-    titleCharCount > 200
+  const charCount = output.title.length;
+  const charColor =
+    charCount > 200
       ? "text-red-500"
-      : titleCharCount > 170
+      : charCount > 170
       ? "text-amber-500"
       : "text-green-600";
 
   return (
-    <div className="space-y-6">
-      {/* Title */}
-      <div>
-        <div className="flex items-center justify-between mb-2">
-          <label className="label mb-0">Title</label>
+    <div className="space-y-4">
+      {/* ── Title ── */}
+      <OutputSection
+        title="Title"
+        action={
           <div className="flex items-center gap-2">
-            <span className={`text-xs font-medium ${charCountColor}`}>
-              {titleCharCount}/200 chars
+            <span className={`text-xs font-semibold ${charColor}`}>
+              {charCount}/200
             </span>
             <CopyButton text={output.title} label="title" />
           </div>
-        </div>
-        <div className="bg-gray-50 border border-gray-100 rounded-xl p-4">
-          <p className="text-sm text-gray-800 leading-relaxed font-medium">
-            {output.title}
-          </p>
-        </div>
-      </div>
+        }
+      >
+        <p className="text-sm font-semibold text-[#1A1A1A] leading-relaxed">
+          {output.title}
+        </p>
+      </OutputSection>
 
-      {/* Bullet Points */}
-      <div>
-        <div className="flex items-center justify-between mb-2">
-          <label className="label mb-0">Bullet Points</label>
-          <CopyButton
-            text={output.bullets.join("\n")}
-            label="all bullets"
-          />
-        </div>
-        <div className="space-y-2">
+      {/* ── Bullets ── */}
+      <OutputSection
+        title="Bullet Points"
+        action={
+          <CopyButton text={output.bullets.join("\n")} label="all bullets" />
+        }
+      >
+        <ul className="space-y-2.5">
           {output.bullets.map((bullet, i) => (
-            <div
+            <li
               key={i}
-              className="group flex items-start gap-3 bg-gray-50 border border-gray-100 rounded-xl px-4 py-3 hover:border-indigo-100 hover:bg-indigo-50/30 transition-colors"
+              className="group flex items-start gap-3 bg-warm-50 border border-warm-100 rounded-xl px-3.5 py-3 hover:border-orange-200 hover:bg-orange-50/30 transition-colors"
             >
-              <span className="shrink-0 w-5 h-5 rounded-full bg-indigo-100 text-indigo-600 text-xs font-bold flex items-center justify-center mt-0.5">
+              <span className="shrink-0 w-5 h-5 rounded-full bg-[#1F1F1F] text-white text-[10px] font-bold flex items-center justify-center mt-0.5">
                 {i + 1}
               </span>
-              <p className="text-sm text-gray-700 flex-1 leading-relaxed">
-                {bullet}
-              </p>
+              <p className="text-sm text-[#2A2A2A] flex-1 leading-relaxed">{bullet}</p>
               <div className="shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
                 <CopyButton text={bullet} label={`bullet ${i + 1}`} />
               </div>
-            </div>
+            </li>
           ))}
-        </div>
-      </div>
+        </ul>
+      </OutputSection>
 
-      {/* Description */}
-      <div>
-        <div className="flex items-center justify-between mb-2">
-          <label className="label mb-0">Description</label>
+      {/* ── Description ── */}
+      <OutputSection
+        title="Description"
+        action={
           <CopyButton text={output.description} label="description" />
-        </div>
-        <div className="bg-gray-50 border border-gray-100 rounded-xl p-4">
-          <p className="text-sm text-gray-700 leading-7">
-            {output.description}
-          </p>
-        </div>
-      </div>
+        }
+      >
+        <p className="text-sm text-[#2A2A2A] leading-7">{output.description}</p>
+      </OutputSection>
 
-      {/* Keywords */}
-      <div>
-        <div className="flex items-center justify-between mb-2">
-          <label className="label mb-0">Backend Keywords</label>
+      {/* ── Keywords ── */}
+      <OutputSection
+        title="Backend Keywords"
+        action={
           <CopyButton
             text={output.keywords.join(", ")}
             label="keywords"
           />
-        </div>
+        }
+      >
         <div className="flex flex-wrap gap-2">
           {output.keywords.map((kw, i) => (
             <span
               key={i}
-              className="inline-flex items-center bg-indigo-50 text-indigo-700 text-xs font-medium px-3 py-1.5 rounded-full border border-indigo-100 hover:bg-indigo-100 transition-colors cursor-default"
+              className="bg-warm-50 border border-warm-200 text-[#5A5550] text-xs font-medium px-3 py-1.5 rounded-full hover:border-orange-200 hover:bg-orange-50 hover:text-orange-700 transition-colors cursor-default"
             >
               {kw}
             </span>
           ))}
         </div>
-      </div>
+      </OutputSection>
 
-      {/* Actions */}
-      <div className="flex flex-col sm:flex-row gap-3 pt-2 border-t border-gray-100">
+      {/* ── Actions ── */}
+      <div className="flex flex-col sm:flex-row gap-3 pt-1">
         <button
           onClick={onRegenerate}
           disabled={isLoading}
@@ -343,23 +349,23 @@ function OutputDisplay({
           ) : (
             <>
               <svg
-                width="16"
-                height="16"
+                width="15"
+                height="15"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
               >
-                <path d="M3 12a9 9 0 019-9 9.75 9.75 0 016.74 2.74L21 8M3 16v4h4M21 8l.74.74M21 12a9 9 0 01-9 9 9.75 9.75 0 01-6.74-2.74L3 16" />
+                <path d="M3 12a9 9 0 019-9 9.75 9.75 0 016.74 2.74L21 8M3 16v4h4M21 8v-4h-4" />
               </svg>
               Generate Again
             </>
           )}
         </button>
-        <button className="btn-primary flex-1 bg-amber-500 hover:bg-amber-600 focus:ring-amber-400">
+        <button className="btn-primary flex-1">
           <svg
-            width="16"
-            height="16"
+            width="14"
+            height="14"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -393,9 +399,7 @@ export default function ListingGenerator() {
   const outputRef = useRef<HTMLDivElement>(null);
 
   const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -413,7 +417,6 @@ export default function ListingGenerator() {
     setLoading(true);
     setError(null);
 
-    // Scroll to output on mobile
     if (window.innerWidth < 1024 && outputRef.current) {
       outputRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
     }
@@ -424,43 +427,32 @@ export default function ListingGenerator() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-
       const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.error || "Something went wrong.");
-      }
-
+      if (!res.ok) throw new Error(data.error || "Something went wrong.");
       setOutput(data as GenerateResponse);
-
-      // Scroll to output after generation on mobile
       if (window.innerWidth < 1024 && outputRef.current) {
         setTimeout(() => {
-          outputRef.current?.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
+          outputRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
         }, 100);
       }
     } catch (err: unknown) {
-      setError(
-        err instanceof Error ? err.message : "An unexpected error occurred."
-      );
+      setError(err instanceof Error ? err.message : "An unexpected error occurred.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-7 items-start">
+
       {/* ── LEFT: Input Form ── */}
       <div className="card">
-        <div className="mb-6">
-          <h3 className="text-base font-semibold text-gray-900">
+        <div className="mb-6 pb-5 border-b border-warm-100">
+          <h3 className="text-[15px] font-bold text-[#1A1A1A] tracking-tight">
             Product Details
           </h3>
-          <p className="text-sm text-gray-400 mt-1">
-            The more specific you are, the better the listing.
+          <p className="text-sm text-[#A8A29E] mt-1">
+            The more specific you are, the better the output.
           </p>
         </div>
 
@@ -468,8 +460,7 @@ export default function ListingGenerator() {
           {/* Product Name */}
           <div>
             <label htmlFor="productName" className="label">
-              Product Name
-              <span className="text-red-400 ml-0.5">*</span>
+              Product Name <span className="text-orange-400">*</span>
             </label>
             <input
               id="productName"
@@ -485,8 +476,7 @@ export default function ListingGenerator() {
           {/* Category */}
           <div>
             <label htmlFor="category" className="label">
-              Category
-              <span className="text-red-400 ml-0.5">*</span>
+              Category <span className="text-orange-400">*</span>
             </label>
             <div className="relative">
               <select
@@ -498,22 +488,11 @@ export default function ListingGenerator() {
               >
                 <option value="">Select a category…</option>
                 {CATEGORIES.map((c) => (
-                  <option key={c} value={c}>
-                    {c}
-                  </option>
+                  <option key={c} value={c}>{c}</option>
                 ))}
               </select>
               <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="#9CA3AF"
-                  strokeWidth="2"
-                >
-                  <path d="M6 9l6 6 6-6" />
-                </svg>
+                <ChevronDown />
               </div>
             </div>
           </div>
@@ -521,8 +500,7 @@ export default function ListingGenerator() {
           {/* Key Features */}
           <div>
             <label htmlFor="keyFeatures" className="label">
-              Key Features
-              <span className="text-red-400 ml-0.5">*</span>
+              Key Features <span className="text-orange-400">*</span>
             </label>
             <textarea
               id="keyFeatures"
@@ -533,18 +511,16 @@ export default function ListingGenerator() {
               onChange={handleChange}
               className="input-field resize-none"
             />
-            <p className="text-xs text-gray-400 mt-1">
-              List features separated by commas
+            <p className="text-xs text-[#B0A99F] mt-1.5">
+              Separate features with commas for best results
             </p>
           </div>
 
-          {/* Two-column row */}
+          {/* Target Customer + Platform */}
           <div className="grid grid-cols-2 gap-4">
-            {/* Target Customer */}
             <div>
               <label htmlFor="targetCustomer" className="label">
-                Target Customer
-                <span className="text-red-400 ml-0.5">*</span>
+                Target Customer <span className="text-orange-400">*</span>
               </label>
               <div className="relative">
                 <select
@@ -556,24 +532,18 @@ export default function ListingGenerator() {
                 >
                   <option value="">Select…</option>
                   {TARGET_CUSTOMERS.map((c) => (
-                    <option key={c} value={c}>
-                      {c}
-                    </option>
+                    <option key={c} value={c}>{c}</option>
                   ))}
                 </select>
                 <div className="pointer-events-none absolute inset-y-0 right-2 flex items-center">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="2">
-                    <path d="M6 9l6 6 6-6" />
-                  </svg>
+                  <ChevronDown />
                 </div>
               </div>
             </div>
 
-            {/* Platform */}
             <div>
               <label htmlFor="platform" className="label">
-                Platform
-                <span className="text-red-400 ml-0.5">*</span>
+                Platform <span className="text-orange-400">*</span>
               </label>
               <div className="relative">
                 <select
@@ -584,15 +554,11 @@ export default function ListingGenerator() {
                   className="input-field appearance-none pr-8 text-xs"
                 >
                   {PLATFORMS.map((p) => (
-                    <option key={p} value={p}>
-                      {p}
-                    </option>
+                    <option key={p} value={p}>{p}</option>
                   ))}
                 </select>
                 <div className="pointer-events-none absolute inset-y-0 right-2 flex items-center">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="2">
-                    <path d="M6 9l6 6 6-6" />
-                  </svg>
+                  <ChevronDown />
                 </div>
               </div>
             </div>
@@ -601,47 +567,46 @@ export default function ListingGenerator() {
           {/* Price Range */}
           <div>
             <label htmlFor="priceRange" className="label">
-              Price Range
-              <span className="text-red-400 ml-0.5">*</span>
+              Price Range <span className="text-orange-400">*</span>
             </label>
             <input
               id="priceRange"
               name="priceRange"
               type="text"
-              placeholder="e.g. ₹499 – ₹799 or Under $20"
+              placeholder="e.g. ₹499 – ₹799"
               value={form.priceRange}
               onChange={handleChange}
               className="input-field"
             />
           </div>
 
-          {/* Competitor Weakness (optional) */}
+          {/* Competitor Weakness */}
           <div>
             <label htmlFor="competitorWeakness" className="label">
               Competitor Weakness{" "}
-              <span className="text-gray-400 font-normal">(optional)</span>
+              <span className="text-[#B0A99F] font-normal">(optional)</span>
             </label>
             <textarea
               id="competitorWeakness"
               name="competitorWeakness"
               rows={2}
-              placeholder="e.g. Competitors have thin handles, no warranty, short battery life…"
+              placeholder="e.g. Thin handles, no warranty, battery dies quickly…"
               value={form.competitorWeakness}
               onChange={handleChange}
               className="input-field resize-none"
             />
-            <p className="text-xs text-gray-400 mt-1">
-              We&apos;ll highlight what makes you better
+            <p className="text-xs text-[#B0A99F] mt-1.5">
+              We&apos;ll position your product as the better choice
             </p>
           </div>
 
-          {/* Error message */}
+          {/* Error */}
           {error && (
             <div className="flex items-start gap-3 bg-red-50 border border-red-100 text-red-700 text-sm rounded-xl px-4 py-3">
               <svg
                 className="shrink-0 mt-0.5"
-                width="16"
-                height="16"
+                width="15"
+                height="15"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -654,11 +619,11 @@ export default function ListingGenerator() {
             </div>
           )}
 
-          {/* Submit Button */}
+          {/* Submit */}
           <button
             onClick={generate}
             disabled={!isFormValid || loading}
-            className="btn-primary w-full text-sm"
+            className="btn-primary w-full py-4 text-[15px]"
           >
             {loading ? (
               <>
@@ -682,27 +647,26 @@ export default function ListingGenerator() {
             )}
           </button>
 
-          <p className="text-center text-xs text-gray-400">
-            Free to use · Powered by Claude AI · No sign-up needed
+          <p className="text-center text-xs text-[#B0A99F]">
+            Free to use · No sign-up needed
           </p>
         </div>
       </div>
 
-      {/* ── RIGHT: Output Preview ── */}
-      <div ref={outputRef} className="card min-h-[560px]">
-        <div className="flex items-center justify-between mb-6">
+      {/* ── RIGHT: Output ── */}
+      <div ref={outputRef}>
+        {/* Output header */}
+        <div className="flex items-center justify-between mb-5">
           <div>
-            <h3 className="text-base font-semibold text-gray-900">
+            <h3 className="text-[15px] font-bold text-[#1A1A1A] tracking-tight">
               Your Listing
             </h3>
-            <p className="text-sm text-gray-400 mt-1">
-              {output
-                ? "Ready to copy & paste"
-                : "Optimized output will appear here"}
+            <p className="text-sm text-[#A8A29E] mt-0.5">
+              {output ? "Ready to copy & paste" : "Optimised output will appear here"}
             </p>
           </div>
           {output && (
-            <span className="inline-flex items-center gap-1.5 bg-green-50 text-green-700 text-xs font-semibold px-3 py-1.5 rounded-full border border-green-100">
+            <span className="inline-flex items-center gap-1.5 bg-green-50 text-green-700 text-[11px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full border border-green-100">
               <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
               Ready
             </span>
@@ -718,7 +682,9 @@ export default function ListingGenerator() {
             isLoading={loading}
           />
         ) : (
-          <EmptyState />
+          <div className="bg-white border border-warm-200 rounded-2xl shadow-soft">
+            <EmptyState />
+          </div>
         )}
       </div>
     </div>
