@@ -128,7 +128,7 @@ export default function Home() {
               Unlock Full Listing – ₹99
             </span>
             <span className="text-[10px] text-white/40 font-medium leading-none mt-0.5">
-              One-time · No subscription
+              Pay only if you like the preview
             </span>
           </button>
         </div>
@@ -169,25 +169,21 @@ export default function Home() {
           <div className="mt-9">
             <a
               href="#generator"
-              className="btn-primary text-[15px] px-9 py-4 rounded-xl shadow-md hover:shadow-lg"
+              className="btn-primary text-[15px] px-9 py-4 rounded-xl shadow-md hover:shadow-lg hover:scale-[1.03]"
             >
-              Generate My Listing
-              <svg
-                width="17"
-                height="17"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-              >
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
+              Generate My Listing &nbsp;→
             </a>
           </div>
 
           {/* Below CTA micro copy */}
           <p className="mt-3.5 text-[13px] text-[#A8A29E]">
             No signup required &nbsp;·&nbsp; Takes 60 seconds
+          </p>
+
+          {/* Urgency line */}
+          <p className="mt-2 text-[13px] text-[#A8A29E] flex items-center justify-center gap-1.5">
+            <span className="text-orange-500">⚡</span>
+            Most listings generated in under 60 seconds
           </p>
 
           {/* Trust line */}
@@ -452,9 +448,14 @@ export default function Home() {
             </span>
           </div>
 
-          <p className="text-[13px] text-white/30 text-center">
-            © 2025 Listify. All rights reserved.
-          </p>
+          <div className="text-center">
+            <p className="text-[13px] text-white/30">
+              © 2025 Listify. All rights reserved.
+            </p>
+            <p className="text-[11px] text-white/20 mt-1">
+              Built for Indian e-commerce sellers &nbsp;·&nbsp; No fluff, just results
+            </p>
+          </div>
 
           <button className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white text-[13px] font-bold px-5 py-2.5 rounded-xl transition-colors">
             <svg
