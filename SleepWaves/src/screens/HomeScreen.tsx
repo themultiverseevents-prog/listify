@@ -10,7 +10,7 @@ import {
   ActivityIndicator,
   Platform,
 } from 'react-native';
-import LottieView from 'lottie-react-native';
+import BreathingCircle from '../components/BreathingCircle';
 import { useAudioStore } from '../store/audioStore';
 import { audioService } from '../services/audioService';
 import { Colors, Spacing, BorderRadius, Typography, Shadows } from '../constants/theme';
@@ -92,13 +92,7 @@ export default function HomeScreen() {
       <View style={styles.content}>
         {/* Breathing Circle */}
         <View style={styles.animationWrapper}>
-          <LottieView
-            source={require('../../assets/breathing-circle.json')}
-            autoPlay
-            loop
-            style={styles.lottie}
-            resizeMode="contain"
-          />
+          <BreathingCircle size={LOTTIE_SIZE} />
         </View>
 
         {/* Breathing label */}
@@ -208,10 +202,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     ...Shadows.purple,
-  },
-  lottie: {
-    width: LOTTIE_SIZE,
-    height: LOTTIE_SIZE,
   },
   breatheLabel: {
     ...Typography.caption,
